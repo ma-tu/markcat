@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var babel = require('gulp-babel');
 var ts = require('gulp-typescript');
+var packager = require('electron-packager');
 
 var tsProject = ts.createProject('tsconfig.json', {});
 
@@ -11,6 +12,20 @@ gulp.task('compile', function() {
         .pipe(gulp.dest('target'));
 });
 
-gulp.task('watch', function() {
-  gulp.watch(['src/*.ts','src/*.tsx'], ['compile'])
-});
+gulp.task('package', ['win32'/*, 'darwin', 'linux'*/].map(function (platform) {
+  var taskName = 'package:' + platform;
+  gulp.task(taskName, ['compile'], function (done) {
+    packager({
+      dir: './',
+      name: 'MarkCat',
+      arch: 'x64',
+      platform: platform,
+      out: 'release/' + platform,
+      version: '0.36.4',
+      overwrite: true
+    }, function (err) {
+      done();
+    });
+  });
+  return taskName;
+}));
