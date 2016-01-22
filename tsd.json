@@ -10,6 +10,15 @@
     },
     "react/react-dom.d.ts": {
       "commit": "4a8a2ed5c35be37a5f1a199a391be21548c81c09"
+    },
+    "node/node.d.ts": {
+      "commit": "4a8a2ed5c35be37a5f1a199a391be21548c81c09"
+    },
+    "chokidar/chokidar.d.ts": {
+      "commit": "4a8a2ed5c35be37a5f1a199a391be21548c81c09"
+    },
+    "marked/marked.d.ts": {
+      "commit": "4a8a2ed5c35be37a5f1a199a391be21548c81c09"
     }
   }
 }
