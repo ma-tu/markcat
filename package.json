@@ -2,24 +2,30 @@
   "name": "markcat",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "gulp compile",
+    "run": "electron ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ma-tu/markcat.git"
+    "url": "https://github.com/ma-tu/markcat.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "ma-tu",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ma-tu/markcat/issues"
   },
   "homepage": "https://github.com/ma-tu/markcat#readme",
   "devDependencies": {
     "babel-preset-es2015": "^6.3.13",
+    "electron-prebuilt": "^0.36.4",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.1",
     "gulp-typescript": "^2.10.0"
+  },
+  "dependencies": {
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6"
   }
 }

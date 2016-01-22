@@ -4,7 +4,7 @@ var ts = require('gulp-typescript');
 
 var tsProject = ts.createProject('tsconfig.json', {});
 
-gulp.task('scripts', function() {
+gulp.task('compile', function() {
     var tsResult = tsProject.src() // instead of gulp.src(...)
         .pipe(ts(tsProject))
         .pipe(babel())
@@ -12,5 +12,5 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('src/*.ts', ['scripts'])
+  gulp.watch(['src/*.ts','src/*.tsx'], ['compile'])
 });
