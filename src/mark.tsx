@@ -13,16 +13,29 @@ interface States {
 
 class MarkComponent extends React.Component<Props, States>{
   private watcher: any
+  private currentTarget: string
 
   constructor(props: Props) {
     super(props);
-    this.watcher = chokidar.watch("./README.md")
+
+    this.currentTarget = "./README.md"
+    this.watcher = chokidar.watch(this.currentTarget)
     this.state = { markdown: ""}
   }
 
   componentDidMount() {
     this.watcher.on('add', this.updateMarkDown.bind(this))
     this.watcher.on('change', this.updateMarkDown.bind(this))
+  }
+
+  handleFileDrop(path: string) {
+    this.changeWatchTarget(path)
+  }
+
+  changeWatchTarget(path: string) {
+    this.watcher.unwatch(this.currentTarget)
+    this.watcher.add(path)
+    this.currentTarget = path
   }
 
   updateMarkDown(path: string, stats: any) {
@@ -35,10 +48,45 @@ class MarkComponent extends React.Component<Props, States>{
   render() {
     let html = marked(this.state.markdown)
     return (
-      <div dangerouslySetInnerHTML={{__html: html}}></div>
+      <div>
+        <Holder onFileDrop={this.handleFileDrop.bind(this)} />
+        <div dangerouslySetInnerHTML={{__html: html}}></div>
+      </div>
     );
   }
 }
+
+interface HolderProps {
+  onFileDrop: any
+}
+
+interface HolderStates {
+  markdown: string
+}
+
+class Holder extends React.Component<HolderProps, HolderStates>{
+  handleDragOver(e: any) {
+    e.preventDefault()
+  }
+
+  handleDrop(e: any) {
+    e.preventDefault()
+    let file = e.dataTransfer.files[0]
+    this.props.onFileDrop(file.path)
+  }
+
+  render() {
+    let style = {
+      position: 'absolute',
+      width: window.innerWidth,
+      height: window.innerHeight
+    }
+    return (
+      <div id="holder" style={style} onDragOver={this.handleDragOver.bind(this)} onDrop={this.handleDrop.bind(this)}></div>
+    )
+  }
+}
+
 
 ReactDOM.render(
   <MarkComponent />,
