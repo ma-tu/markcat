@@ -5,6 +5,8 @@ import * as chokidar from 'chokidar'
 import * as React  from 'react';
 import * as ReactDOM  from 'react-dom';
 
+const remote = require('remote');
+
 interface Props {}
 
 interface States {
@@ -18,7 +20,12 @@ class MarkComponent extends React.Component<Props, States>{
   constructor(props: Props) {
     super(props);
 
-    this.currentTarget = "./README.md"
+    const argv = remote.process.argv
+    const initPage = argv[argv.length-1]
+    this.currentTarget = ""
+    if (argv.length == 2){
+      this.currentTarget = initPage
+    }
     this.watcher = chokidar.watch(this.currentTarget)
     this.state = { markdown: ""}
   }
