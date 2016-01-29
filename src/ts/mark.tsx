@@ -1,4 +1,4 @@
-/// <reference path="../typings/tsd.d.ts" />
+/// <reference path="../../typings/tsd.d.ts" />
 import * as fs from 'fs'
 import * as marked from 'marked'
 import * as chokidar from 'chokidar'
@@ -23,7 +23,7 @@ class MarkComponent extends React.Component<Props, States>{
     const argv = remote.process.argv
     const initPage = argv[argv.length-1]
     this.currentTarget = ""
-    if (argv.length == 2){
+    if ((argv.length == 2) && (initPage.toLowerCase().endsWith("md"))){
       this.currentTarget = initPage
     }
     this.watcher = chokidar.watch(this.currentTarget)

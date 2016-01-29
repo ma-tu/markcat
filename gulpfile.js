@@ -1,26 +1,114 @@
 var gulp = require('gulp');
-var babel = require('gulp-babel');
+var watch = require('gulp-watch');
+var install = require('gulp-install')
+var useref = require('gulp-useref')
 var ts = require('gulp-typescript');
+var babel = require('gulp-babel');
+var del = require('del');
+var runSequence = require('run-sequence');
 var packager = require('electron-packager');
+var electronServer = require('electron-connect').server;
 
-var tsProject = ts.createProject('tsconfig.json', {});
+var srcDir      = 'src';
+var distDir     = 'dist';
+var releaseDir  = 'release';
 
-gulp.task('compile', function() {
-    var tsResult = tsProject.src() // instead of gulp.src(...)
-        .pipe(ts(tsProject))
-        .pipe(babel())
-        .pipe(gulp.dest('target'));
+gulp.task('clean:dist', function (done) {
+  return del(distDir);
 });
 
-gulp.task('package', ['win32'/*, 'darwin', 'linux'*/].map(function (platform) {
+gulp.task('clean:release', function (done) {
+  return del(releaseDir);
+});
+
+gulp.task('clean', ['clean:dist', 'clean:release']);
+
+gulp.task('serve:html', function() {
+  return gulp.src(srcDir + '/**/*.html')
+    .pipe(gulp.dest(distDir))
+    ;
+});
+
+gulp.task('serve:main-js', function() {
+  return gulp.src(srcDir + '/main.js')
+    .pipe(gulp.dest(distDir))
+    ;
+});
+
+gulp.task('serve:compile', function() {
+  var tsProject = ts.createProject('tsconfig.json', {});
+  return tsProject.src(srcDir + '/**/*.{js,jsx,ts,tsx}')
+    .pipe(ts(tsProject))
+    .pipe(babel())
+    .pipe(gulp.dest(distDir))
+    ;
+});
+
+gulp.task('serve:wait', function (done) {
+  var electron = electronServer.create();
+  electron.start();
+
+  gulp.watch(srcDir + '/**/*.html', ['serve:html']);
+  gulp.watch(srcDir + '/main.js', ['serve:main-js']);
+  gulp.watch(srcDir + '/**/*.{js,jsx,ts,tsx}', ['serve:compile']);
+
+  gulp.watch(distDir + '/main.js', electron.restart);
+  gulp.watch([distDir + '/**/*.html', distDir + '/ts/**/*.js'], electron.reload);
+  done;
+});
+
+gulp.task('serve', function(callback) {
+  runSequence('clean:dist',
+              ['serve:html', 'serve:main-js', 'serve:compile'],
+              'serve:wait',
+              callback);
+});
+
+gulp.task('build:html', function() {
+  return gulp.src(srcDir + '/**/*.html')
+    .pipe(useref())
+    .pipe(gulp.dest(distDir))
+    ;
+});
+
+gulp.task('build:main-js', function() {
+  return gulp.src(srcDir + '/main.js')
+    .pipe(useref())
+    .pipe(gulp.dest(distDir))
+    ;
+});
+
+gulp.task('build:compile', function() {
+  var tsProject = ts.createProject('tsconfig.json', {});
+  return tsProject.src(srcDir + '/**/*.{js,jsx,ts,tsx}')
+    .pipe(ts(tsProject))
+    .pipe(babel())
+    .pipe(gulp.dest(distDir))
+    ;
+});
+
+gulp.task('build:package-json', function() {
+  return gulp.src(srcDir + '/package/package.json')
+    .pipe(gulp.dest(distDir))
+    ;
+});
+
+gulp.task('build:install-dependencies', ['build:package-json'], function() {
+  return gulp.src(distDir + '/package.json')
+    .pipe(gulp.dest('dist/'))
+    .pipe(install({production: true}))
+    ;
+});
+
+gulp.task('build:package', ['win32'/*, 'darwin', 'linux'*/].map(function (platform) {
   var taskName = 'package:' + platform;
-  gulp.task(taskName, ['compile'], function (done) {
+  gulp.task(taskName, function (done) {
     packager({
-      dir: './',
+      dir: distDir,
       name: 'MarkCat',
       arch: 'x64',
       platform: platform,
-      out: 'release/' + platform,
+      out: releaseDir + '/' + platform,
       version: '0.36.4',
       overwrite: true
     }, function (err) {
@@ -29,3 +117,10 @@ gulp.task('package', ['win32'/*, 'darwin', 'linux'*/].map(function (platform) {
   });
   return taskName;
 }));
+
+gulp.task('build', function(callback) {
+  runSequence('clean',
+              ['build:html', 'build:main-js', 'build:compile', 'build:install-dependencies'],
+              'build:package',
+              callback);
+});

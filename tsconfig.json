@@ -1,14 +1,13 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "jsx": "react",
         "target": "es6",
-        "noImplicitAny": true,
-        "outDir": "target",
         "rootDir": "src",
+        "jsx": "react",
+        "noImplicitAny": true,
         "sourceMap": true
     },
-    "compileOnSave": true,
+    "compileOnSave": false,
     "exclude": [
         "node_modules"
     ]
