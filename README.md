@@ -37,6 +37,15 @@ aa
 > abc
 >> bcd
 
+# コードブロック
+
+```javascript
+var output = 'output'
+console.log(output)
+
+```
+
+
 # コードブロック(インライン)
 
 バッククォート x 3 で囲む、バッククォートは Shift+@　です  ```echo "Hello world!```

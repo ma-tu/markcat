@@ -35,6 +35,13 @@ gulp.task('serve:css:github-markdown-css', function() {
     ;
 });
 
+gulp.task('serve:css:highlight-github-css', function() {
+  return gulp.src('node_modules/highlight.js/styles/github.css')
+    .pipe(gulp.dest(distDir + "/css"))
+    ;
+});
+
+
 gulp.task('serve:main-js', function() {
   return gulp.src(srcDir + '/main.js')
     .pipe(gulp.dest(distDir))
@@ -65,7 +72,7 @@ gulp.task('serve:wait', function (done) {
 
 gulp.task('serve', function(callback) {
   runSequence('clean:dist',
-              ['serve:html', 'serve:main-js', 'serve:css:github-markdown-css', 'serve:compile'],
+              ['serve:html', 'serve:main-js', 'serve:css:github-markdown-css', 'serve:css:highlight-github-css', 'serve:compile'],
               'serve:wait',
               callback);
 });

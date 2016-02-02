@@ -4,6 +4,7 @@ import * as marked from 'marked'
 import * as chokidar from 'chokidar'
 import * as React  from 'react';
 import * as ReactDOM  from 'react-dom';
+import {highlight} from 'highlight.js';
 
 const remote = require('remote');
 
@@ -53,6 +54,16 @@ class MarkComponent extends React.Component<Props, States>{
   }
 
   render() {
+    marked.setOptions({
+      highlight: function (code: string, lang: string): string {
+        if (lang === undefined) {
+            return code;
+        }
+                
+        return highlight(lang, code).value;
+      }
+    })
+
     let html = marked(this.state.markdown)
     return (
       <div>
