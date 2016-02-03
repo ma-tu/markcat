@@ -59,7 +59,7 @@ class MarkComponent extends React.Component<Props, States>{
         if (lang === undefined) {
             return code;
         }
-                
+
         return highlight(lang, code).value;
       }
     })

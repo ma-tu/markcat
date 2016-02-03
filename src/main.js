@@ -1,5 +1,7 @@
 'use strict';
 
+const menu = require('./ts/menu');
+
 const electron = require('electron');
 const app = electron.app;  // Module to control application life.
 const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
@@ -38,4 +40,7 @@ app.on('ready', function() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  menu.build(mainWindow);
+
 });

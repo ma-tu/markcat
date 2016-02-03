@@ -12,7 +12,7 @@
       "commit": "4a8a2ed5c35be37a5f1a199a391be21548c81c09"
     },
     "node/node.d.ts": {
-      "commit": "4a8a2ed5c35be37a5f1a199a391be21548c81c09"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "chokidar/chokidar.d.ts": {
       "commit": "4a8a2ed5c35be37a5f1a199a391be21548c81c09"
@@ -22,6 +22,9 @@
     },
     "highlightjs/highlightjs.d.ts": {
       "commit": "717a5fdb079f8dd7c19f1b22f7f656dd990f0ccf"
+    },
+    "github-electron/github-electron.d.ts": {
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     }
   }
 }
