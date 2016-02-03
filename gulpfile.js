@@ -23,24 +23,25 @@ gulp.task('clean:release', function (done) {
 
 gulp.task('clean', ['clean:dist', 'clean:release']);
 
-gulp.task('serve:html', function() {
-  return gulp.src(srcDir + '/**/*.html')
-    .pipe(gulp.dest(distDir))
-    ;
-});
-
-gulp.task('serve:css:github-markdown-css', function() {
+gulp.task('copy:css:github-markdown-css', function() {
   return gulp.src('node_modules/github-markdown-css/github-markdown.css')
     .pipe(gulp.dest(distDir + "/css"))
     ;
 });
 
-gulp.task('serve:css:highlight-github-css', function() {
+gulp.task('copy:css:highlight-github-css', function() {
   return gulp.src('node_modules/highlight.js/styles/github.css')
     .pipe(gulp.dest(distDir + "/css"))
     ;
 });
 
+gulp.task('copy:css', ['copy:css:github-markdown-css', 'copy:css:highlight-github-css']);
+
+gulp.task('serve:html', function() {
+  return gulp.src(srcDir + '/**/*.html')
+    .pipe(gulp.dest(distDir))
+    ;
+});
 
 gulp.task('serve:main-js', function() {
   return gulp.src(srcDir + '/main.js')
@@ -72,7 +73,7 @@ gulp.task('serve:wait', function (done) {
 
 gulp.task('serve', function(callback) {
   runSequence('clean:dist',
-              ['serve:html', 'serve:main-js', 'serve:css:github-markdown-css', 'serve:css:highlight-github-css', 'serve:compile'],
+              ['serve:html', 'serve:main-js', 'copy:css', 'serve:compile'],
               'serve:wait',
               callback);
 });
@@ -133,7 +134,7 @@ gulp.task('build:package', ['win32'/*, 'darwin', 'linux'*/].map(function (platfo
 
 gulp.task('build', function(callback) {
   runSequence('clean',
-              ['build:html', 'build:main-js', 'build:compile', 'build:install-dependencies'],
+              ['build:html', 'build:main-js', 'copy:css', 'build:compile', 'build:install-dependencies'],
               'build:package',
               callback);
 });

@@ -16,6 +16,8 @@
   "homepage": "https://github.com/ma-tu/markcat#readme",
   "dependencies": {
     "chokidar": "^1.4.2",
+    "github-markdown-css": "^2.2.1",
+    "highlight.js": "^9.1.0",
     "marked": "^0.3.5",
     "react": "^0.14.6",
     "react-dom": "^0.14.6"
