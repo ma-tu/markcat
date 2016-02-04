@@ -29,13 +29,19 @@ gulp.task('copy:css:github-markdown-css', function() {
     ;
 });
 
+gulp.task('copy:css:src-css', function() {
+  return gulp.src(srcDir + '/css/*.css')
+    .pipe(gulp.dest(distDir + "/css"))
+    ;
+});
+
 gulp.task('copy:css:highlight-github-css', function() {
   return gulp.src('node_modules/highlight.js/styles/github.css')
     .pipe(gulp.dest(distDir + "/css"))
     ;
 });
 
-gulp.task('copy:css', ['copy:css:github-markdown-css', 'copy:css:highlight-github-css']);
+gulp.task('copy:css', ['copy:css:github-markdown-css', 'copy:css:highlight-github-css', 'copy:css:src-css']);
 
 gulp.task('serve:html', function() {
   return gulp.src(srcDir + '/**/*.html')
@@ -65,9 +71,10 @@ gulp.task('serve:wait', function (done) {
   gulp.watch(srcDir + '/**/*.html', ['serve:html']);
   gulp.watch(srcDir + '/main.js', ['serve:main-js']);
   gulp.watch(srcDir + '/**/*.{js,jsx,ts,tsx}', ['serve:compile']);
+  gulp.watch(srcDir + '/css/*.css', ['copy:css:src-css']);
 
   gulp.watch(distDir + '/main.js', electron.restart);
-  gulp.watch([distDir + '/**/*.html', distDir + '/ts/**/*.js'], electron.reload);
+  gulp.watch([distDir + '/**/*.html', distDir + '/ts/**/*.js', distDir + '/**/*.css'], electron.reload);
   done;
 });
 

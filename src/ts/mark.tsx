@@ -94,13 +94,8 @@ class Holder extends React.Component<HolderProps, HolderStates>{
   }
 
   render() {
-    let style = {
-      position: 'absolute',
-      width: window.innerWidth,
-      height: window.innerHeight
-    }
     return (
-      <div id="holder" style={style} onDragOver={this.handleDragOver.bind(this)} onDrop={this.handleDrop.bind(this)}></div>
+      <div id="holder" onDragOver={this.handleDragOver.bind(this)} onDrop={this.handleDrop.bind(this)}></div>
     )
   }
 }
