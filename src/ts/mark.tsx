@@ -23,7 +23,7 @@ class MarkComponent extends React.Component<Props, States>{
 
     const argv = remote.process.argv
     const initPage = argv[argv.length-1]
-    this.currentTarget = ""
+    this.currentTarget = "README.md"
     if ((argv.length == 2) && (initPage.toLowerCase().endsWith("md"))){
       this.currentTarget = initPage
     }
@@ -105,3 +105,38 @@ ReactDOM.render(
   <MarkComponent />,
   document.getElementById('content')
 );
+
+function changeThema(themaId: string) {
+  switch(themaId) {
+    case 'thema-normal':
+      changeThemaMenu(themaId)
+      changeCssThemaFile('./css/thema-normal.css')
+      break
+    case 'thema-dark':
+      changeThemaMenu(themaId)
+      changeCssThemaFile('./css/thema-dark.css')
+      break
+  }
+}
+
+function changeThemaMenu(themaId: string) {
+  const themaThemaMenu = remote.app.getApplicationMenu().items.find((item: Electron.MenuItemOptions) => item.id == 'thema')
+  const themaNormalItem = themaThemaMenu.submenu.items.find((item: Electron.MenuItemOptions) => item.id == 'thema-normal')
+  const themaDarkItem = themaThemaMenu.submenu.items.find((item: Electron.MenuItemOptions) => item.id == 'thema-dark')
+
+  switch(themaId) {
+    case 'thema-normal':
+      themaNormalItem.checked = true
+      themaDarkItem.checked = false
+      break
+    case 'thema-dark':
+      themaNormalItem.checked = false
+      themaDarkItem.checked = true
+      break
+  }
+}
+
+function changeCssThemaFile(cssFilePath: string) {
+  var linkEl: HTMLLinkElement = document.getElementById('css-thema') as HTMLLinkElement
+  linkEl.href = cssFilePath;
+}
