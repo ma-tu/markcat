@@ -1,6 +1,7 @@
 import * as electron from 'electron'
+import * as config from './config'
 
-export function build(mainWin: Electron.BrowserWindow) {
+export function build(mainWin: Electron.BrowserWindow, cfg: config.Config) {
   const template = [{
     label: 'Menu',
     id: 'menu',
@@ -30,7 +31,7 @@ export function build(mainWin: Electron.BrowserWindow) {
         label: 'Normal',
         id: 'thema-normal',
         type: 'checkbox',
-        checked: true,
+        checked: (cfg.thema == 'thema-normal'),
         click: () => {
           mainWin.webContents.executeJavaScript("changeThema('thema-normal')")
         }
@@ -39,7 +40,7 @@ export function build(mainWin: Electron.BrowserWindow) {
         label: 'Dark',
         id: 'thema-dark',
         type: 'checkbox',
-        checked: false,
+        checked: (cfg.thema == 'thema-dark'),
         click: () => {
           mainWin.webContents.executeJavaScript("changeThema('thema-dark')")
         }

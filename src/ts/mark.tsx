@@ -5,6 +5,7 @@ import * as chokidar from 'chokidar'
 import * as React  from 'react';
 import * as ReactDOM  from 'react-dom';
 import {highlight} from 'highlight.js';
+import * as config from './config'
 
 const remote = require('remote');
 
@@ -34,6 +35,7 @@ class MarkComponent extends React.Component<Props, States>{
   componentDidMount() {
     this.watcher.on('add', this.updateMarkDown.bind(this))
     this.watcher.on('change', this.updateMarkDown.bind(this))
+    changeThema(remote.getGlobal('cfg').thema)
   }
 
   handleFileDrop(path: string) {
@@ -107,6 +109,10 @@ ReactDOM.render(
 );
 
 function changeThema(themaId: string) {
+  var cfg: config.Config = remote.getGlobal('cfg')
+  cfg.thema = themaId
+  remote.require('./ts/config').writeConfig(remote.process.execPath, cfg)
+
   switch(themaId) {
     case 'thema-normal':
       changeThemaMenu(themaId)

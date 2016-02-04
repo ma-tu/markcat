@@ -6,6 +6,8 @@ const electron = require('electron');
 const app = electron.app;  // Module to control application life.
 const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
 
+const config = require('./ts/config')
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
@@ -41,6 +43,7 @@ app.on('ready', function() {
     mainWindow = null;
   });
 
-  menu.build(mainWindow);
-
+  var cfg = config.readConfig(process.execPath)
+  global.cfg = cfg
+  menu.build(mainWindow, cfg);
 });
