@@ -27,6 +27,7 @@ gulp.task('clean', ['clean:dist', 'clean:release']);
 
 gulp.task('concat:css:thema-normal', function () {
   return gulp.src([
+    srcDir + "/css/markcat.css",
     srcDir + '/css/markcat-normal.css',
     'node_modules/github-markdown-css/github-markdown.css',
     'node_modules/highlight.js/styles/github.css'])
@@ -36,6 +37,7 @@ gulp.task('concat:css:thema-normal', function () {
 
 gulp.task('concat:css:thema-dark', function () {
   return gulp.src([
+    srcDir + "/css/markcat.css",
     srcDir + '/css/markcat-dark.css',
     srcDir + '/css/github-markdown-dark.css',
     srcDir + '/css/github-dark.css'])

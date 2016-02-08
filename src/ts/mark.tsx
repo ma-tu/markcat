@@ -68,15 +68,13 @@ class MarkComponent extends React.Component<Props, States>{
 
     let html = marked(this.state.markdown)
     return (
-      <div>
-        <Holder onFileDrop={this.handleFileDrop.bind(this)} />
-        <div dangerouslySetInnerHTML={{__html: html}}></div>
-      </div>
+      <Holder html={html} onFileDrop={this.handleFileDrop.bind(this)} />
     );
   }
 }
 
 interface HolderProps {
+  html: string,
   onFileDrop: any
 }
 
@@ -97,7 +95,9 @@ class Holder extends React.Component<HolderProps, HolderStates>{
 
   render() {
     return (
-      <div id="holder" onDragOver={this.handleDragOver.bind(this)} onDrop={this.handleDrop.bind(this)}></div>
+      <div id="holder" onDragOver={this.handleDragOver.bind(this)} onDrop={this.handleDrop.bind(this)}>
+        <div id="mark-content" dangerouslySetInnerHTML={{__html: this.props.html}} />
+      </div>
     )
   }
 }
