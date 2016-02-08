@@ -25,7 +25,7 @@ class MarkComponent extends React.Component<Props, States>{
 
     const argv = remote.process.argv
     const initPage = argv[argv.length-1]
-    this.currentTarget = "README.md"
+    this.currentTarget = ""
     if ((argv.length == 2) && (initPage.toLowerCase().endsWith("md"))){
       this.currentTarget = initPage
     }

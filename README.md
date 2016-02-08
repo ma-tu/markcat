@@ -1,115 +1,36 @@
 # markcat
 
 markcat は Electron で作成した Markdown Viewer です。
-以下の特徴があります
 
-* シンプル（学習に最適）
-* gulp + react + electron とはやりの技術を利用していて楽しい
-* とりあえず markdown を見ることぐらいはできる。
+## 特徴
 
-# Sample
+* typescript(es6) + gulp + react + electron と今風の技術を利用しています。
+* シンプルなので学習にも最適
+* とはいえ Markdown としての基本機能に追加して以下のこだわり機能を実装しています。
+* Windows Only
 
-# 見出し
+## Markdown Viewer としてのこだわり機能
 
-見出しに利用する　#　の数で大きさが変わる。
+* **Intellij IDEA の Darula 風の表示テーマを用意**
+* 編集時の自動更新
+* Github Flavored Markdown
+* コードハイライト表示
+* ドラッグ＆ドロップからの Markdown表示
+* Windows の sendTo に配置することにより、エクスプローラーの「送る」からの Markdown表示
+* Windows の ファイル関連付けを行うと、ダブルクリックからの Markdown表示
 
-# 見出し（最大）
-### 見出し
-###### 見出し(最小)
-
-# 改行
-
-改行したいときは、行末にスペース二つ
-改行だけの行をつくることでそこでパラグラフが分かれる
-
-あああ  
-aa
-
-# 強調文字
-
-アスタリスク で囲むと斜体で、アスタリスク二つでで囲むとBOLD
-
-*斜体*
-**BOLD**
-
-# ブロッククォート
-
-> abc
->> bcd
-
-# コードブロック
-
-```javascript
-var output = 'output'
-console.log(output)
+## Build方法
 
 ```
+npm run build
+```
 
+## Thanks
 
-# コードブロック(インライン)
+* 開発のキッカケおよびかなり参考にしました => [rhysd/Shiba](https://github.com/rhysd/Shiba)
+* gulpの設定および、開発時の自動再読み込み機能(electron-connect) => [ぼくのかんがえたさいきょうのElectron](http://qiita.com/Quramy/items/90d61ff37ca1b95a7f6d)
+* Electron や React について困ったことの多くを解決頂きました。 => [アカベコマイリ](http://akabeko.me/blog/)
 
-バッククォート x 3 で囲む、バッククォートは Shift+@　です  ```echo "Hello world!```
+## License
 
-# コードブロック（段落）
-
-スペース４つでブロックになる。
-
-    あああいいい
-    あああ
-
-
-# リスト
-
-- 123
-- 234
-
-# リスト
-
-リストは \* でも \+ でもOK。タブを入れると子要素になる
-
-* aaa
-  * bbb
-    * aaa
-
-# リスト番号付
-
-1. 123
-2. 234
-
-# リンク
-
-URLを <> で囲む
-<http://www.yahoo.co.jp>
-
-テキストに対してリンクを張る
-[テキスト](http://www.yahoo.co.jp)
-
-# 特殊記号のエスケープ
-
-円マークです。
-\#
-
-# 水平線
-
-以下のどれでもいいけどハイフンがわかりやすいかな。
-
----
-***
-___
-
-# 画像
-
-リンクの記述方法で
-![テキスト](link)
-
-# 表組み
-
-|タイトル|タイトル2|タイトル3|
-|:-|:-:|-:|
-|abc|bcd|cde|
-|fgh|ijkl|msmsms|
-
-前後の　\|　は省略可能
-\: の位置で 右寄せなどがかわる
-
-~~打消し~~
+MIT License
