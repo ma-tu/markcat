@@ -14,14 +14,14 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 .hljs-comment,
 .hljs-quote {
-  color: #CDC673;//change #998;
+  color: #CDC673;/*#998;*/
   font-style: italic;
 }
 
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-subst {
-  color: #DEB887;//#333;
+  color: #DEB887;/*#333;*/
   font-weight: bold;
 }
 
@@ -30,18 +30,18 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-variable,
 .hljs-template-variable,
 .hljs-tag .hljs-attr {
-  color: #B9D3EE;//change #008080;
+  color: #B9D3EE;/*#008080;*/
 }
 
 .hljs-string,
 .hljs-doctag {
-  color: #C0FF3E;//change #d14;
+  color: #C0FF3E;/*#d14;*/
 }
 
 .hljs-title,
 .hljs-section,
 .hljs-selector-id {
-  color: #EEEEEE;//change #900;
+  color: #EEEEEE;/*#900;*/
   font-weight: bold;
 }
 
@@ -51,20 +51,20 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 .hljs-type,
 .hljs-class .hljs-title {
-  color: #EEEEEE;//change #458;
+  color: #EEEEEE;/*#458;*/
   font-weight: bold;
 }
 
 .hljs-tag,
 .hljs-name,
 .hljs-attribute {
-  color: #99CCFF;//change #000080;
+  color: #99CCFF;/*#000080;*/
   font-weight: normal;
 }
 
 .hljs-regexp,
 .hljs-link {
-  color: #70DB93;//change #009926;
+  color: #70DB93;/*#009926;*/
 }
 
 .hljs-symbol,
@@ -74,11 +74,11 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 .hljs-built_in,
 .hljs-builtin-name {
-  color: #BBFFFF;//change #0086b3;
+  color: #BBFFFF;/*#0086b3;*/
 }
 
 .hljs-meta {
-  color: #FFD700;//#999;
+  color: #FFD700;/*#999;*/
   font-weight: bold;
 }
 

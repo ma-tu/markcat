@@ -4,10 +4,10 @@
 }
 
 .markdown-body {
-  background: #2B2B2B;//add
+  background: #2B2B2B;/*add*/
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  color: #ddd;//change normal string color #333;
+  color: #ddd;/*#333;*/
   font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 16px;
   line-height: 1.6;
@@ -90,7 +90,7 @@
 }
 
 .markdown-body a {
-  color: #00CDCD;//change link #4078c0;
+  color: #00CDCD;/*#4078c0;*/
   text-decoration: none;
 }
 
@@ -253,7 +253,7 @@
 .markdown-body h4,
 .markdown-body h5,
 .markdown-body h6 {
-  color: #eee;//add h6.color
+  color: #eee;/*add*/
   margin-top: 1em;
   margin-bottom: 16px;
   font-weight: bold;
@@ -266,7 +266,7 @@
 .markdown-body h4 .octicon-link,
 .markdown-body h5 .octicon-link,
 .markdown-body h6 .octicon-link {
-  color: #fff;//change #000;
+  color: #fff;/*#000;*/
   vertical-align: middle;
   visibility: hidden;
 }
@@ -338,7 +338,7 @@
 
 .markdown-body h6 {
   font-size: 1em;
-  color: #bbb;//change #777;
+  color: #bbb;/*#777;*/
 }
 
 .markdown-body h6 .anchor {
@@ -357,10 +357,10 @@
 }
 
 .markdown-body hr {
-  height: 2px;//change 4px
+  height: 2px;/*4px*/
   padding: 0;
   margin: 16px 0;
-  background-color: #999;//change #e7e7e7;
+  background-color: #999;/*#e7e7e7;*/
   border: 0 none;
 }
 
@@ -400,8 +400,8 @@
 
 .markdown-body blockquote {
   padding: 0 15px;
-  color: #ddd;//change #777;
-  border-left: 4px solid #999;//change #ddd;
+  color: #ddd;/*#777;*/
+  border-left: 4px solid #999;/*#ddd;*/
 }
 
 .markdown-body blockquote>:first-child {
@@ -431,18 +431,18 @@
 }
 
 .markdown-body table tr {
-  background-color: #222;//change #fff;
+  background-color: #222;/*#fff;*/
   border-top: 1px solid #ccc;
 }
 
 .markdown-body table tr:nth-child(2n) {
-  background-color: #333;//change #f8f8f8;
+  background-color: #333;/*#f8f8f8;*/
 }
 
 .markdown-body img {
   max-width: 100%;
   box-sizing: content-box;
-  background-color: #222;//change #fff;
+  background-color: #222;/*#fff;*/
 }
 
 .markdown-body code {
@@ -481,7 +481,7 @@
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
-  background-color: #3B3B3B;//change #f7f7f7;
+  background-color: #3B3B3B;/*#f7f7f7;*/
   border-radius: 3px;
 }
 
@@ -518,7 +518,7 @@
   line-height: 10px;
   color: #555;
   vertical-align: middle;
-  background-color: transparent;//change #fcfcfc;
+  background-color: transparent;/*#fcfcfc;*/
   border: solid 1px #ccc;
   border-bottom-color: #bbb;
   border-radius: 3px;
