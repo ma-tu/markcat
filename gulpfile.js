@@ -136,6 +136,7 @@ gulp.task('build:package', ['win32'/*, 'darwin', 'linux'*/].map(function (platfo
       platform: platform,
       out: releaseDir + '/' + platform,
       version: '0.36.4',
+      icon: 'resource/markcat-multi.ico',
       overwrite: true
     }, function (err) {
       done();
