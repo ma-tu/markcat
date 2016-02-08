@@ -6,6 +6,7 @@ import * as React  from 'react';
 import * as ReactDOM  from 'react-dom';
 import {highlight} from 'highlight.js';
 import * as config from './config'
+import * as electron from 'electron'
 
 const remote = require('remote');
 
@@ -36,6 +37,24 @@ class MarkComponent extends React.Component<Props, States>{
     this.watcher.on('add', this.updateMarkDown.bind(this))
     this.watcher.on('change', this.updateMarkDown.bind(this))
     changeThema(remote.getGlobal('cfg').thema)
+    this.setOpenLinkWithBrowser()
+  }
+
+  componentDidUpdate() {
+    this.setOpenLinkWithBrowser()
+  }
+
+  setOpenLinkWithBrowser() {
+    const anchors = document.querySelectorAll('a')
+    for(let i = 0; i < anchors.length; i++) {
+      let anker = anchors.item(i) as HTMLLinkElement
+      anker.onclick = (e) => {
+        event.preventDefault()
+
+        let target = event.target as HTMLLinkElement
+        electron.shell.openExternal(target.href)
+      }
+    }
   }
 
   handleFileDrop(path: string) {
