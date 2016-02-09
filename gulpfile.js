@@ -27,22 +27,22 @@ gulp.task('clean', ['clean:dist', 'clean:release']);
 
 gulp.task('concat:css:thema-normal', function () {
   return gulp.src([
-    srcDir + "/css/markcat.css",
-    srcDir + '/css/markcat-normal.css',
+    srcDir + "/renderer/css/markcat.css",
+    srcDir + '/renderer/css/markcat-normal.css',
     'node_modules/github-markdown-css/github-markdown.css',
     'node_modules/highlight.js/styles/github.css'])
     .pipe(concat('thema-normal.css'))
-    .pipe(gulp.dest(distDir + "/css"));
+    .pipe(gulp.dest(distDir + "/renderer/css"));
 });
 
 gulp.task('concat:css:thema-dark', function () {
   return gulp.src([
-    srcDir + "/css/markcat.css",
-    srcDir + '/css/markcat-dark.css',
-    srcDir + '/css/github-markdown-dark.css',
-    srcDir + '/css/github-dark.css'])
+    srcDir + "/renderer/css/markcat.css",
+    srcDir + '/renderer/css/markcat-dark.css',
+    srcDir + '/renderer/css/github-markdown-dark.css',
+    srcDir + '/renderer/css/github-dark.css'])
     .pipe(concat('thema-dark.css'))
-    .pipe(gulp.dest(distDir + "/css"));
+    .pipe(gulp.dest(distDir + "/renderer/css"));
 });
 
 gulp.task('concat:css', ['concat:css:thema-normal', 'concat:css:thema-dark']);
@@ -53,8 +53,8 @@ gulp.task('serve:html', function() {
     ;
 });
 
-gulp.task('serve:main-js', function() {
-  return gulp.src(srcDir + '/main.js')
+gulp.task('serve:app-js', function() {
+  return gulp.src(srcDir + '/app.js')
     .pipe(gulp.dest(distDir))
     ;
 });
@@ -74,18 +74,18 @@ gulp.task('serve:wait', function (done) {
   electron.start();
 
   gulp.watch(srcDir + '/**/*.html', ['serve:html']);
-  gulp.watch(srcDir + '/main.js', ['serve:main-js']);
+  gulp.watch(srcDir + '/app.js', ['serve:app-js']);
   gulp.watch(srcDir + '/**/*.{js,jsx,ts,tsx}', ['serve:compile']);
   gulp.watch(srcDir + '/css/*.css', ['concat:css']);
 
-  gulp.watch(distDir + '/main.js', electron.restart);
-  gulp.watch([distDir + '/**/*.html', distDir + '/ts/**/*.js', distDir + '/**/*.css'], electron.reload);
+  gulp.watch(distDir + '/app.js', electron.restart);
+  gulp.watch([distDir + '/**/*.html', distDir + '/renderer/**/*.js', distDir + '/services/**/*.js', distDir + '/**/*.css'], electron.reload);
   done;
 });
 
 gulp.task('serve', function(callback) {
   runSequence('clean:dist',
-              ['serve:html', 'serve:main-js', 'concat:css', 'serve:compile'],
+              ['serve:html', 'serve:app-js', 'concat:css', 'serve:compile'],
               'serve:wait',
               callback);
 });
@@ -97,8 +97,8 @@ gulp.task('build:html', function() {
     ;
 });
 
-gulp.task('build:main-js', function() {
-  return gulp.src(srcDir + '/main.js')
+gulp.task('build:app-js', function() {
+  return gulp.src(srcDir + '/app.js')
     .pipe(useref())
     .pipe(gulp.dest(distDir))
     ;
@@ -147,7 +147,7 @@ gulp.task('build:package', ['win32'/*, 'darwin', 'linux'*/].map(function (platfo
 
 gulp.task('build', function(callback) {
   runSequence('clean',
-              ['build:html', 'build:main-js', 'concat:css', 'build:compile', 'build:install-dependencies'],
+              ['build:html', 'build:app-js', 'concat:css', 'build:compile', 'build:install-dependencies'],
               'build:package',
               callback);
 });

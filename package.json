@@ -2,7 +2,7 @@
   "name": "markcat",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/main.js",
+  "main": "dist/app.js",
   "scripts": {
     "clean": "gulp clean",
     "serve": "gulp serve",
