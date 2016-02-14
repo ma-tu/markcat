@@ -7,7 +7,8 @@
     "init": "tsd install",
     "clean": "gulp clean",
     "serve": "gulp serve",
-    "build": "gulp build"
+    "build:mac": "gulp build:mac",
+    "build:win": "gulp build:win"
   },
   "repository": {
     "type": "git",

@@ -126,28 +126,47 @@ gulp.task('build:install-dependencies', ['build:package-json'], function() {
     ;
 });
 
-gulp.task('build:package', ['win32'/*, 'darwin', 'linux'*/].map(function (platform) {
-  var taskName = 'package:' + platform;
-  gulp.task(taskName, function (done) {
-    packager({
-      dir: distDir,
-      name: 'MarkCat',
-      arch: 'x64',
-      platform: platform,
-      out: releaseDir + '/' + platform,
-      version: '0.36.4',
-      icon: 'resource/markcat-multi.ico',
-      overwrite: true
-    }, function (err) {
-      done();
-    });
+gulp.task('build:package:win', function (done) {
+  return packager({
+    dir: distDir,
+    name: 'MarkCat',
+    arch: 'x64',
+    platform: 'win32',
+    out: releaseDir + '/win32-x64',
+    version: '0.36.4',
+    icon: 'resource/markcat-win.ico',
+    overwrite: true
+  }, function (err, path) {
+    done();
   });
-  return taskName;
-}));
+});
 
-gulp.task('build', function(callback) {
+
+gulp.task('build:package:darwin', function (done) {
+  return packager({
+    dir: distDir,
+    name: 'MarkCat',
+    arch: 'x64',
+    platform: 'darwin',
+    out: releaseDir + '/darwin',
+    version: '0.36.4',
+    icon: 'resource/markcat-mac.icns',
+    overwrite: true
+  }, function (err, path) {
+    done();
+  });
+});
+
+gulp.task('build:win', function(callback) {
   runSequence('clean',
               ['build:html', 'build:app-js', 'concat:css', 'build:compile', 'build:install-dependencies'],
-              'build:package',
+              'build:package:win',
+              callback);
+});
+
+gulp.task('build:mac', function(callback) {
+  runSequence('clean',
+              ['build:html', 'build:app-js', 'concat:css', 'build:compile', 'build:install-dependencies'],
+              'build:package:darwin',
               callback);
 });
