@@ -22,6 +22,15 @@ app.on('window-all-closed', function() {
   //}
 });
 
+// for mac
+// filePath from "open this application"
+var openFilePath = null;
+var openFileHandler = function(event, path) {
+  event.preventDefault();
+  openFilePath = path;
+};
+app.on('open-file', openFileHandler);
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
@@ -43,6 +52,11 @@ app.on('ready', function() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  // for mac
+  // filePath from "open this application"
+  app.removeListener('open-file', openFileHandler);
+  global.openFilePath = openFilePath;
 
   var cfg = config.readConfig(process.execPath)
   global.cfg = cfg
