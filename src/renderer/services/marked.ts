@@ -12,6 +12,5 @@ export function convertMarkedHtml(content: string): string {
     }
   })
 
-  let html = marked(content)
-  return html
+  return marked(content)
 }

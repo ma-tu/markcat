@@ -25,7 +25,7 @@ export class MarkdownComponent extends React.Component<{}, MarkdownComponentStat
   }
 
   render() {
-    let html = Marked.convertMarkedHtml(this.state.markdown)
+    const html = Marked.convertMarkedHtml(this.state.markdown)
     return (
       <ContentHolderComponent html={html} onFileDrop={this.handleFileDrop.bind(this)} />
     );
@@ -47,11 +47,11 @@ export class MarkdownComponent extends React.Component<{}, MarkdownComponentStat
   private setOpenLinkWithBrowser(): void {
     const anchors = document.querySelectorAll('a')
     for(let i = 0; i < anchors.length; i++) {
-      let anker = anchors.item(i) as HTMLLinkElement
+      const anker = anchors.item(i) as HTMLLinkElement
       anker.onclick = (e) => {
         event.preventDefault()
 
-        let target = event.target as HTMLLinkElement
+        const target = event.target as HTMLLinkElement
         electron.shell.openExternal(target.href)
       }
     }

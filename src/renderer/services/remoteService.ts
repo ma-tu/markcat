@@ -7,7 +7,7 @@ export function getArgumentInitPath(): string {
   if ((argv.length == 2) && (initPage.toLowerCase().endsWith("md"))){
     return initPage
   }else{
-    return "README.md"
+    return ""
   }
 }
 
