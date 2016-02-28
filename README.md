@@ -53,6 +53,7 @@ MarkCat 起動後メニューバーの [Thema] から [Dark]を選択します�
 * 準備：最初一回だけ以下実行します
 ```
 git clone https://github.com/ma-tu/markcat.git
+cd markcat
 npm install
 npm run init
 ```
