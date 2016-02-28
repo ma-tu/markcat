@@ -24,8 +24,8 @@ markcat は Electron で作成した Markdown Viewer です。
 ## 開発動機
 
 Markdown は普段は Atom などのエディタを利用して作成しています。  
-Markdown を見る時も同じく Atom を利用したり、Chrome の拡張機能を利用して表示したりしていたのですが、md ファイルをダブルクリックしたり、エクスプローラーのコンテキストメニューからサクッと見ることができないかと考えていました。
-そんな時 WEB+DB Press の Reactの記事の中で marked という markdown parse が紹介されていたのをきっかけに、また [rhysd/Shiba](https://github.com/rhysd/Shiba) を拝見して、自分用の Markdown Viewer を作ってみたいと思いました。
+Markdown を見る時も同じく Atom を利用したり、Chrome の拡張機能を利用して表示したりしていたのですが、md ファイルをダブルクリックしたり、エクスプローラーのコンテキストメニューからサクッと見ることができないかと考えていました。  
+そんな時 WEB+DB Press の React の記事の中で marked という markdown parser が紹介されていたのをきっかけに、また [rhysd/Shiba](https://github.com/rhysd/Shiba) を拝見して、自分用の Markdown Viewer を作ってみたいと思いました。
 
 ## 利用方法
 
