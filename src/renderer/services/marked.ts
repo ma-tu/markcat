@@ -5,10 +5,16 @@ export function convertMarkedHtml(content: string): string {
   marked.setOptions({
     highlight: function (code: string, lang: string): string {
       if (lang === undefined) {
-          return code;
+          return code
       }
-
-      return highlight(lang, code).value;
+      
+      const langSplit = lang.split(':')
+      try {
+          return highlight(langSplit[0], code).value
+      } catch (e) {
+          console.log(e.message)
+          return code
+      }
     }
   })
 
