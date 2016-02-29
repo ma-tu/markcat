@@ -1,14 +1,19 @@
 const remote = require('remote');
 
 export function getArgumentInitPath(): string {
+  let initPage = ""
+
   const osXOpenFile = remote.getGlobal('openFilePath')
-  const argv = remote.process.argv.concat([osXOpenFile])
-  const initPage = argv[argv.length-1]
-  if ((argv.length == 2) && (initPage !== null)&& (initPage.toLowerCase().endsWith("md"))){
-    return initPage
+  if (osXOpenFile) {
+    initPage = osXOpenFile
   }else{
-    return ""
+    const argv = remote.process.argv
+    const argPath = argv[argv.length - 1]
+    if ((argv.length === 2) && (argPath) && (argPath.toLowerCase().endsWith("md"))){
+      initPage = argPath
+    }
   }
+  return initPage
 }
 
 export function getThema(): string {
