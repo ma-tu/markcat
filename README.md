@@ -1,5 +1,7 @@
 # markcat
 
+![MarkCat アイコン](https://raw.githubusercontent.com/ma-tu/my-images/master/markcat/markcat-logo-s.jpg)
+
 markcat は Electron で作成した Markdown Viewer です。
 
 ## 機能的な特徴
@@ -14,6 +16,8 @@ markcat は Electron で作成した Markdown Viewer です。
 * (Windows)ファイル関連付けを行うと、ダブルクリックからの Markdown 表示
 * (Mac)このアプリケーションで開く からの起動。
 * (Mac)ファイル拡張子で関連付けを行うと、ダブルクリックからの Markdown 表示
+
+![MarkCat 画面イメージ](https://raw.githubusercontent.com/ma-tu/my-images/master/markcat/markcat-thema-image.jpg)
 
 ## 開発としての特徴
 
